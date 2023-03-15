@@ -1,0 +1,41 @@
+﻿@model NETCoreMVCwithMSGraph.Models.ToDoTaskModel
+@{
+    ViewData["Title"] = "To Do Task List";
+}
+
+<div>
+    <h1>To Do Task List</h1>
+    @if ((User.Identity?.IsAuthenticated == true))
+    {
+        if (Model.TaskLists != null && Model.TaskLists.Any())
+        {
+            @foreach (var tasks in Model.TaskLists)
+            {
+
+                <div class="card" style="width: 50rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            @tasks.DisplayName
+
+                        </h5>
+                      
+                    </div>
+                </div>
+                <br />
+
+            }
+
+        }
+        else
+        {
+            <div>No Tasks found</div>
+        }
+    }
+    else
+    {
+        <a class="btn btn-primary btn-large" asp-area="MicrosoftIdentity" asp-controller="Account" asp-action="SignIn">Click here to sign in</a>
+    }
+
+
+</div>
+
